@@ -3,6 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Die GitHub-Kopie ist nur Ablage. Besucher gehören auf die eigene Domain,
+     damit geteilte Links dort landen. Greift ausschließlich auf github.io –
+     unter zulassungsdienstdemiral.de passiert nichts, also keine Schleife.
+     Zum Ansehen der GitHub-Fassung: ?preview=1 an die Adresse hängen. -->
+<script>
+(function () {
+  var h = location.hostname;
+  if ((h === 'demiral10.github.io' || h.slice(-10) === '.github.io')
+      && location.search.indexOf('preview=1') === -1) {
+    location.replace('https://zulassungsdienstdemiral.de/' + location.hash);
+  }
+})();
+</script>
+
 <title>Zulassungsdienst Essen – Ummeldung, Kennzeichen | Demiral</title>
 <meta name="description" content="Zulassungsdienst Essen: Anmeldung, Ummeldung, Abmeldung, Kurzzeit-, Zoll- &amp; Ausfuhrkennzeichen. Kennzeichen vor Ort geprägt, Express-Zulassung in 15 Min.">
 <link rel="canonical" href="https://zulassungsdienstdemiral.de/">
