@@ -229,6 +229,49 @@
   .config-actions .btn{flex:1;min-width:160px;}
   .hint{font-size:.73rem;color:var(--ink-soft);margin-top:11px;}
 
+  /* ---------- Bestellstrecke im Konfigurator ---------- */
+  .orderbox{margin-top:20px;border-top:1px solid var(--line);padding-top:18px;}
+  .orderbox > summary{cursor:pointer;font-family:var(--font-plate);text-transform:uppercase;letter-spacing:.08em;
+    font-size:.78rem;font-weight:600;color:var(--amtsblau);list-style:none;display:flex;align-items:center;gap:9px;}
+  .orderbox > summary::-webkit-details-marker{display:none;}
+  .orderbox > summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;
+    width:20px;height:20px;border-radius:50%;background:var(--amtsblau);color:#fff;font-size:.9rem;line-height:1;flex-shrink:0;}
+  .orderbox[open] > summary::before{content:"–";}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+  .form-grid .full{grid-column:1/-1;}
+  @media(max-width:620px){.form-grid{grid-template-columns:1fr;}}
+  .field .sub{font-size:.72rem;font-weight:400;color:var(--ink-soft);text-transform:none;letter-spacing:0;display:block;margin-top:3px;}
+  /* .field setzt display:flex und wuerde das hidden-Attribut sonst aushebeln */
+  .field[hidden]{display:none;}
+  .field input.err{border-color:var(--siegel);background:#FDF4F3;}
+  .formerr{color:var(--siegel);font-size:.78rem;font-weight:600;margin:12px 0 0;display:none;}
+  .formerr.on{display:block;}
+
+  /* ---------- Leiste Online-Abmeldung ---------- */
+  .abm{background:var(--deep);color:#fff;padding:60px 0;}
+  .abm .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:start;}
+  @media(max-width:900px){.abm .wrap{grid-template-columns:1fr;gap:30px;}}
+  .abm .eyebrow{color:#fff;}
+  .abm .eyebrow::before{background:var(--gold);}
+  .abm h2{font-size:clamp(1.8rem,3.2vw,2.5rem);margin:12px 0 0;}
+  .abm p.lead{color:#C4D0E8;margin:14px 0 0;}
+  .abm .abm-price{display:inline-flex;align-items:baseline;gap:9px;margin-top:22px;
+    background:var(--siegel);border-radius:6px;padding:11px 18px;}
+  .abm .abm-price b{font-family:var(--font-display);font-size:1.7rem;line-height:1;white-space:nowrap;}
+  .abm .abm-price span{font-size:.78rem;letter-spacing:.04em;}
+  .abm .abm-facts{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:9px;}
+  .abm .abm-facts li{position:relative;padding-left:26px;font-size:.9rem;color:#D5DEEF;}
+  .abm .abm-facts li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .abm-card{background:var(--card);color:var(--ink);border-radius:10px;padding:26px;}
+  .abm-card h3{font-family:var(--font-plate);text-transform:uppercase;letter-spacing:.07em;font-size:.86rem;color:var(--amtsblau);}
+  .abm-warn{margin:14px 0 0;padding:13px 15px;border-radius:6px;background:#FDF4F3;border-left:4px solid var(--siegel);
+    font-size:.82rem;color:#6E2620;display:none;}
+  .abm-warn.on{display:block;}
+  .abm-note{margin:16px 0 0;padding:13px 15px;border-radius:6px;background:#F4F6F1;border:1px solid var(--line);
+    font-size:.79rem;color:var(--ink-soft);}
+  .abm-note b{color:var(--ink);}
+
+
   /* ---------- marquee ---------- */
   .marquee{overflow:hidden;background:var(--card);border-block:1px solid var(--line);margin-top:64px;}
   .mq-track{display:flex;width:max-content;animation:mq 32s linear infinite;}
@@ -613,9 +656,9 @@
           <div class="price-box">
             <div>
               <span class="pl">Schilderpreis</span>
-              <div class="pv" id="priceOut">25,00 €</div>
+              <div class="pv" id="priceOut">30,00 €</div>
             </div>
-            <div class="pn" id="priceNote">1 Schild 15,- € · 2 Schilder einzeilig 25,- €</div>
+            <div class="pn" id="priceNote">1 Schild 15,- € · Satz (2 Schilder) 30,- €</div>
           </div>
 
           <div class="config-actions">
@@ -623,7 +666,82 @@
             <a href="tel:+491637953047" class="btn btn-outline">Lieber anrufen</a>
           </div>
           <div class="hint">Öffnet WhatsApp mit vorausgefüllter Anfrage an 0163 7953047 – Sie können vorher noch alles ergänzen.</div>
+
+          <details class="orderbox" id="orderBox">
+            <summary>Verbindlich bestellen – Bezahlung bei Abholung</summary>
+            <div class="form-grid">
+              <div class="field"><label for="obName">Name <span class="sub">Vor- und Nachname</span></label>
+                <input id="obName" autocomplete="name"></div>
+              <div class="field"><label for="obTel">Telefon</label>
+                <input id="obTel" type="tel" autocomplete="tel"></div>
+              <div class="field full"><label for="obMail">E-Mail</label>
+                <input id="obMail" type="email" autocomplete="email"></div>
+              <div class="field full" id="obAddrWrap" hidden><label for="obAddr">Lieferadresse <span class="sub">Straße, Hausnummer, PLZ und Ort – nur bei Versand</span></label>
+                <input id="obAddr" autocomplete="street-address"></div>
+              <div class="field full"><label for="obNote">Anmerkung <span class="sub">optional</span></label>
+                <input id="obNote"></div>
+            </div>
+            <p class="formerr" id="obErr"></p>
+            <div class="config-actions" style="margin-top:16px;">
+              <a id="obWa" href="#" class="btn btn-wa">Bestellung per WhatsApp</a>
+              <a id="obMailBtn" href="#" class="btn btn-primary">Bestellung per E-Mail</a>
+            </div>
+            <div class="hint">Ihre Bestellung wird in WhatsApp bzw. Ihrem E-Mail-Programm mit allen Angaben vorbereitet – abschicken müssen Sie sie selbst. Bezahlt wird bei Abholung oder Lieferung, eine Online-Zahlung gibt es nicht.</div>
+          </details>
+
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ONLINE-ABMELDUNG -->
+  <section id="online-abmeldung" class="abm">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Online-Service</div>
+        <h2 class="d">Fahrzeug online abmelden</h2>
+        <p class="lead">Außerbetriebsetzung, ohne herzukommen: Sie schicken uns die Daten vom Fahrzeugschein und den Kennzeichen, wir setzen das Fahrzeug sofort über das iKfz-Portal außer Betrieb.</p>
+        <div class="abm-price"><b>20,-&nbsp;€</b><span>pauschal, wenn online sofort möglich</span></div>
+        <ul class="abm-facts">
+          <li>Meist möglich für Fahrzeuge, die ab dem 01.01.2015 zugelassen wurden – vorher gibt es die nötigen Sicherheitscodes noch nicht.</li>
+          <li>Nicht möglich für Gelsenkirchen, Herne und den Kreis Bergisch Gladbach.</li>
+          <li>Die Codes unter den Siegeln sind einmalig verwendbar – bitte erst freilegen, wenn Sie wirklich abmelden wollen.</li>
+        </ul>
+      </div>
+
+      <div class="abm-card reveal">
+        <h3>Daten für die Abmeldung</h3>
+        <div class="form-grid">
+          <div class="field full"><label for="abKz">Kennzeichen <span class="sub">z. B. E AM 6421</span></label>
+            <input id="abKz" autocomplete="off"></div>
+          <div class="field full"><label for="abFin">Fahrgestellnummer (FIN) <span class="sub">Feld E im Fahrzeugschein (ZB1), 17 Zeichen</span></label>
+            <input id="abFin" autocomplete="off" spellcheck="false" autocapitalize="off"></div>
+          <div class="field full"><label for="abZb1">Sicherheitscode ZB1 <span class="sub">Rückseite des Fahrzeugscheins freirubbeln oder Aufkleber abziehen – bitte exakt mit Groß- und Kleinschreibung</span></label>
+            <input id="abZb1" autocomplete="off" spellcheck="false" autocapitalize="off"></div>
+          <div class="field"><label for="abVorn">Code Siegel vorn <span class="sub">3-stellig, unter dem Stadtsiegel</span></label>
+            <input id="abVorn" maxlength="3" autocomplete="off" spellcheck="false" autocapitalize="off"></div>
+          <div class="field"><label for="abHinten">Code Siegel hinten <span class="sub">3-stellig – das Schild mit der HU-Plakette (TÜV)</span></label>
+            <input id="abHinten" maxlength="3" autocomplete="off" spellcheck="false" autocapitalize="off"></div>
+          <div class="field full"><label for="abEz">Erstzulassung <span class="sub">Monat und Jahr, steht in Feld B im Fahrzeugschein</span></label>
+            <input id="abEz" type="month"></div>
+          <div class="field"><label for="abName">Name</label>
+            <input id="abName" autocomplete="name"></div>
+          <div class="field"><label for="abTel">Telefon</label>
+            <input id="abTel" type="tel" autocomplete="tel"></div>
+          <div class="field full"><label for="abMail">E-Mail</label>
+            <input id="abMail" type="email" autocomplete="email"></div>
+        </div>
+
+        <div class="abm-warn" id="abWarn"></div>
+        <p class="formerr" id="abErr"></p>
+
+        <div class="config-actions" style="margin-top:18px;">
+          <a id="abWa" href="#" class="btn btn-wa">Per WhatsApp senden</a>
+          <a id="abMailBtn" href="#" class="btn btn-primary">Per E-Mail senden</a>
+        </div>
+
+        <div class="abm-note">Die Anfrage wird in WhatsApp bzw. Ihrem E-Mail-Programm vorbereitet – <b>abschicken müssen Sie sie selbst.</b> Wir melden uns nach Prüfung mit der Bestätigung. Die 20,- € werden erst fällig, wenn die Abmeldung durchgeht.</div>
       </div>
     </div>
   </section>
@@ -1057,7 +1175,7 @@
     if (cfg.art === '3d') return null;
     var extra = (cfg.art === 'carbon') ? CARBON_EXTRA : 0;
     if (cfg.qty === 1) return euro(15 + extra);
-    if (!isTwoRow()) return euro(25 + extra);
+    if (!isTwoRow()) return euro(30 + extra);
     return null;
   }
   function updatePrice(){
@@ -1070,7 +1188,7 @@
     } else if (cfg.art === 'carbon'){
       priceNote.textContent = 'Inklusive 10,- € Aufpreis für die Carbon-Optik (einmalig pro Bestellung).';
     } else {
-      priceNote.textContent = '1 Schild 15,- € · 2 Schilder einzeilig 25,- €';
+      priceNote.textContent = '1 Schild 15,- € · Satz (2 Schilder) 30,- €';
     }
   }
 
@@ -1271,6 +1389,20 @@
     waLink.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
   }
 
+  /* Aktuelle Konfiguration fuer die Bestellstrecke bereitstellen */
+  window.kfzKonfiguration = function(){
+    var suffix = cfg.art === 'e' ? ' E' : (cfg.art === 'h' ? ' H' : '');
+    return {
+      kennzeichen: (cfg.region || 'E') + ' ' + (cfg.letters || 'XX') + ' ' + (cfg.numbers || '000') + suffix,
+      art: ART_LABEL[cfg.art],
+      groesse: cfg.size,
+      anzahl: cfg.qty,
+      lieferart: cfg.delivery,
+      preis: priceText() || 'auf Anfrage',
+      versand: /Versand/i.test(cfg.delivery)
+    };
+  };
+
   function refresh(){
     cfg.art = artSelect.value;
     cfg.size = sizeSelect.value;
@@ -1449,6 +1581,159 @@
           } });
       }
     }
+  }
+})();
+</script>
+
+<script>
+/* ---------- Bestellstrecke und Online-Abmeldung ---------- */
+(function () {
+  var WA   = '491637953047';
+  var MAIL = 'mdemiral@aol.com';
+  var $ = function (id) { return document.getElementById(id); };
+
+  function wa(text)   { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); }
+  function mail(betreff, text) {
+    return 'mailto:' + MAIL + '?subject=' + encodeURIComponent(betreff) + '&body=' + encodeURIComponent(text);
+  }
+
+  /* Prueft Pflichtfelder, markiert Leeres rot und meldet die fehlenden Namen */
+  function pruefe(felder, errBox) {
+    var fehlt = [];
+    felder.forEach(function (f) {
+      var leer = !f.el.value.trim();
+      f.el.classList.toggle('err', leer);
+      if (leer) fehlt.push(f.name);
+    });
+    if (fehlt.length) {
+      errBox.textContent = 'Bitte noch ausfüllen: ' + fehlt.join(', ');
+      errBox.classList.add('on');
+      return false;
+    }
+    errBox.classList.remove('on');
+    return true;
+  }
+
+  /* Haengt Klick-Handler an einen Link: erst pruefen, dann oeffnen.
+     felderFn wird bei jedem Klick neu ausgewertet, weil das Adressfeld
+     je nach Lieferart dazukommt oder wegfaellt. */
+  function absenden(el, felderFn, errBox, bauen, alsMail) {
+    if (!el) return;
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      var felder = typeof felderFn === 'function' ? felderFn() : felderFn;
+      if (!pruefe(felder, errBox)) {
+        felder.filter(function (f) { return !f.el.value.trim(); })[0].el.focus();
+        return;
+      }
+      var d = bauen();
+      window.open(alsMail ? mail(d.betreff, d.text) : wa(d.betreff + '\n' + d.text),
+                  alsMail ? '_self' : '_blank');
+    });
+  }
+
+  /* ================= Bestellung Kennzeichen ================= */
+  var obName = $('obName');
+  if (obName && typeof window.kfzKonfiguration === 'function') {
+    var obTel = $('obTel'), obMail = $('obMail'), obAddr = $('obAddr'),
+        obNote = $('obNote'), obErr = $('obErr'), obAddrWrap = $('obAddrWrap');
+
+    /* Adressfeld nur bei Versand zeigen */
+    function adressfeld() {
+      var v = window.kfzKonfiguration().versand;
+      obAddrWrap.hidden = !v;
+      if (!v) { obAddr.value = ''; obAddr.classList.remove('err'); }
+    }
+    ['btnVersand', 'btnAbholung'].forEach(function (id) {
+      var b = $(id);
+      if (b) b.addEventListener('click', function () { setTimeout(adressfeld, 0); });
+    });
+    adressfeld();
+
+    function obFelder() {
+      var f = [{ el: obName, name: 'Name' }, { el: obTel, name: 'Telefon' }, { el: obMail, name: 'E-Mail' }];
+      if (!obAddrWrap.hidden) f.push({ el: obAddr, name: 'Lieferadresse' });
+      return f;
+    }
+    function obBauen() {
+      var k = window.kfzKonfiguration();
+      var t = 'Kennzeichen: ' + k.kennzeichen + '\n'
+            + 'Art: ' + k.art + '\n'
+            + 'Größe: ' + k.groesse + '\n'
+            + 'Anzahl: ' + k.anzahl + (k.anzahl === 1 ? ' Schild' : ' Schilder') + '\n'
+            + 'Preis laut Website: ' + k.preis + '\n'
+            + 'Lieferart: ' + k.lieferart + '\n\n'
+            + 'Name: ' + obName.value.trim() + '\n'
+            + 'Telefon: ' + obTel.value.trim() + '\n'
+            + 'E-Mail: ' + obMail.value.trim();
+      if (!obAddrWrap.hidden) t += '\nLieferadresse: ' + obAddr.value.trim();
+      if (obNote.value.trim()) t += '\nAnmerkung: ' + obNote.value.trim();
+      return { betreff: 'Bestellung Kennzeichen ' + k.kennzeichen, text: t };
+    }
+    absenden($('obWa'),      obFelder, obErr, obBauen, false);
+    absenden($('obMailBtn'), obFelder, obErr, obBauen, true);
+  }
+
+  /* ================= Online-Abmeldung ================= */
+  var abKz = $('abKz');
+  if (abKz) {
+    var abFin = $('abFin'), abZb1 = $('abZb1'), abVorn = $('abVorn'), abHinten = $('abHinten'),
+        abEz = $('abEz'), abName = $('abName'), abTel = $('abTel'), abMail = $('abMail'),
+        abWarn = $('abWarn'), abErr = $('abErr');
+
+    /* Bezirke ohne Online-Abmeldung */
+    var GESPERRT = { GE: 'Gelsenkirchen', HER: 'Herne', GL: 'Bergisch Gladbach (Rheinisch-Bergischer Kreis)' };
+
+    abKz.addEventListener('input', function () { abKz.value = abKz.value.toUpperCase(); pruefeMachbar(); });
+    abEz.addEventListener('change', pruefeMachbar);
+    /* FIN: Großbuchstaben, ohne I/O/Q wie bei der Fahrgestellnummer üblich */
+    abFin.addEventListener('input', function () {
+      abFin.value = abFin.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '').slice(0, 17);
+      pruefeMachbar();
+    });
+    [abVorn, abHinten].forEach(function (el) {
+      el.addEventListener('input', function () { el.value = el.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 3); });
+    });
+
+    function pruefeMachbar() {
+      var hinweise = [];
+      var kuerzel = (abKz.value.trim().split(/[\s-]+/)[0] || '').toUpperCase();
+      if (GESPERRT[kuerzel]) {
+        hinweise.push('Für <b>' + GESPERRT[kuerzel] + '</b> ist die Online-Abmeldung leider nicht möglich. '
+                    + 'Rufen Sie uns an – wir erledigen die Abmeldung dann klassisch für Sie.');
+      }
+      if (abEz.value && abEz.value < '2015-01') {
+        hinweise.push('Erstzulassung vor dem 01.01.2015: Dafür gibt es die Sicherheitscodes im iKfz-System '
+                    + 'meist noch nicht. Prüfen Sie, ob unter den Siegeln überhaupt Codes stehen.');
+      }
+      if (abFin.value && abFin.value.length !== 17) {
+        hinweise.push('Die Fahrgestellnummer hat normalerweise 17 Zeichen – aktuell sind es ' + abFin.value.length + '.');
+      }
+      abWarn.innerHTML = hinweise.join('<br><br>');
+      abWarn.classList.toggle('on', hinweise.length > 0);
+    }
+
+    var abFelder = [
+      { el: abKz, name: 'Kennzeichen' }, { el: abFin, name: 'Fahrgestellnummer' },
+      { el: abZb1, name: 'Sicherheitscode ZB1' }, { el: abVorn, name: 'Code Siegel vorn' },
+      { el: abHinten, name: 'Code Siegel hinten' }, { el: abName, name: 'Name' },
+      { el: abTel, name: 'Telefon' }, { el: abMail, name: 'E-Mail' }
+    ];
+    function abBauen() {
+      var t = 'Kennzeichen: ' + abKz.value.trim() + '\n'
+            + 'FIN (Feld E): ' + abFin.value.trim() + '\n'
+            + 'Sicherheitscode ZB1: ' + abZb1.value.trim() + '\n'
+            + 'Code Siegel vorn: ' + abVorn.value.trim() + '\n'
+            + 'Code Siegel hinten: ' + abHinten.value.trim() + '\n'
+            + 'Erstzulassung: ' + (abEz.value || 'nicht angegeben') + '\n'
+            + 'Preis laut Website: 20,- €\n\n'
+            + 'Name: ' + abName.value.trim() + '\n'
+            + 'Telefon: ' + abTel.value.trim() + '\n'
+            + 'E-Mail: ' + abMail.value.trim();
+      return { betreff: 'Online-Abmeldung ' + abKz.value.trim(), text: t };
+    }
+    absenden($('abWa'),      abFelder, abErr, abBauen, false);
+    absenden($('abMailBtn'), abFelder, abErr, abBauen, true);
   }
 })();
 </script>
