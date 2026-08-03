@@ -452,8 +452,23 @@
   footer a{color:#fff;text-decoration:none;}
   footer a:hover{text-decoration:underline;}
   .legal-links{display:flex;gap:20px;flex-wrap:wrap;}
-  details.legal{max-width:1180px;margin:18px auto 0;padding:0 26px;color:#989EA6;font-size:.78rem;line-height:1.7;}
-  details.legal summary{cursor:pointer;color:#C6CAD0;margin-bottom:8px;font-weight:600;}
+  details.legal{max-width:1180px;margin:18px auto 0;padding:0 26px;color:var(--ink-soft);font-size:.78rem;line-height:1.7;}
+  details.legal summary{cursor:pointer;color:var(--ink);margin-bottom:8px;font-weight:600;}
+  details.legal h4{color:var(--ink);font-size:.8rem;margin:15px 0 5px;font-weight:700;}
+  details.legal p{margin:0 0 9px;}
+  details.legal ul,details.legal ol{margin:0 0 9px;padding-left:20px;}
+  details.legal li{margin-bottom:4px;}
+  details.legal strong{color:var(--ink);}
+  details.legal a{color:var(--amtsblau);}
+  details.legal .box{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:10px 0;}
+
+  /* Pflicht-Haekchen in den Formularen */
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.79rem;color:var(--ink-soft);
+    margin-top:14px;cursor:pointer;line-height:1.5;}
+  .check input{margin:2px 0 0;width:17px;height:17px;flex-shrink:0;accent-color:var(--amtsblau);}
+  .check a{color:var(--amtsblau);}
+  .check.err{color:var(--siegel);}
+  .check.err a{color:var(--siegel);}
 
   /* ---------- WhatsApp FAB ---------- */
   .wa-fab{position:fixed;right:22px;bottom:22px;z-index:200;width:60px;height:60px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -8px rgba(23,138,66,.65);transition:transform .18s ease;}
@@ -692,6 +707,10 @@
               <div class="field full"><label for="obNote">Anmerkung <span class="sub">optional</span></label>
                 <input id="obNote"></div>
             </div>
+            <label class="check">
+              <input type="checkbox" id="obAgb">
+              <span>Ich habe die <a href="#agb">AGB</a> und die <a href="#widerruf">Widerrufsbelehrung</a> gelesen. Mir ist bekannt, dass geprägte Kennzeichen Sonderanfertigungen sind und dafür kein Widerrufsrecht besteht.</span>
+            </label>
             <p class="formerr" id="obErr"></p>
             <div class="config-actions" style="margin-top:16px;">
               <a id="obWa" href="#" class="btn btn-wa">Bestellung per WhatsApp</a>
@@ -744,6 +763,15 @@
           <div class="field full"><label for="abMail">E-Mail</label>
             <input id="abMail" type="email" autocomplete="email"></div>
         </div>
+
+        <label class="check">
+          <input type="checkbox" id="abAgb">
+          <span>Ich habe die <a href="#agb">AGB</a> und die <a href="#widerruf">Widerrufsbelehrung</a> gelesen.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="abSofort">
+          <span>Ich verlange ausdrücklich, dass Sie vor Ablauf der Widerrufsfrist mit der Abmeldung beginnen. Mir ist bekannt, dass ich mein Widerrufsrecht verliere, sobald die Abmeldung vollständig ausgeführt ist.</span>
+        </label>
 
         <div class="abm-warn" id="abWarn"></div>
         <p class="formerr" id="abErr"></p>
@@ -1106,6 +1134,8 @@
       <a href="mailto:mdemiral@aol.com">mdemiral@aol.com</a>
       <a href="tel:+492014746926">0201 4746926</a>
       <a href="#impressum">Impressum</a>
+      <a href="#agb">AGB</a>
+      <a href="#widerruf">Widerruf</a>
       <a href="#datenschutz">Datenschutz</a>
     </div>
   </div>
@@ -1122,9 +1152,127 @@
   Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: DE242576635<br>
   Verantwortlich im Sinne des § 18 Abs. 2 MStV: Mustafa Demiral, Anschrift wie oben.
 </details>
+<details class="legal" id="agb">
+  <summary>Allgemeine Geschäftsbedingungen (AGB)</summary>
+
+  <h4>§ 1 Geltungsbereich und Anbieter</h4>
+  <p>Diese Bedingungen gelten für alle Verträge, die Sie über diese Website oder auf deren Grundlage per WhatsApp, E-Mail oder Telefon mit uns schließen. Anbieter ist Mustafa Demiral, Zulassungsdienst &amp; Autoschilder Demiral, Bottroper Str. 104, 45356 Essen (weitere Angaben im Impressum). Verbraucher ist jede natürliche Person, die das Geschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können.</p>
+
+  <h4>§ 2 Vertragsschluss</h4>
+  <p>Die Darstellung unserer Leistungen auf dieser Website ist kein bindendes Angebot, sondern eine Aufforderung zur Bestellung. Wenn Sie das Bestell- oder Abmeldeformular ausfüllen und die Anfrage per WhatsApp oder E-Mail an uns senden, geben Sie ein verbindliches Angebot ab. Der Vertrag kommt zustande, sobald wir Ihre Anfrage ausdrücklich bestätigen oder mit der Ausführung beginnen. Eine automatisierte Empfangsbestätigung stellt noch keine Annahme dar.</p>
+
+  <h4>§ 3 Leistungen</h4>
+  <p>Wir prägen Kfz-Kennzeichen und übernehmen Zulassungsangelegenheiten aller Art, darunter Neuzulassung, Ummeldung, Abmeldung, Kurzzeit-, Zoll- und Ausfuhrkennzeichen sowie die Online-Außerbetriebsetzung über das iKfz-Portal. Wir handeln dabei im Rahmen der uns erteilten Vollmacht gegenüber der zuständigen Zulassungsbehörde. Die Zuteilung von Kennzeichen und die Entscheidung über Zulassungsvorgänge obliegt allein der Behörde.</p>
+
+  <h4>§ 4 Preise und Zahlung</h4>
+  <p>Alle angegebenen Preise sind Endpreise in Euro und enthalten die gesetzliche Umsatzsteuer. Beim Preis für die Online-Abmeldung sind die Gebühren der Zulassungsstelle enthalten. Bei den übrigen Leistungen können amtliche Gebühren hinzukommen; wir weisen Sie vor Vertragsschluss darauf hin. Versand ist gegen Aufpreis möglich, die Versandkosten nennen wir Ihnen vor der Bestellung.</p>
+  <p>Eine Zahlung über diese Website ist nicht möglich. Bezahlt wird bei Abholung, bei Lieferung oder nach Vereinbarung per Rechnung.</p>
+
+  <h4>§ 5 Lieferung und Versand</h4>
+  <p>Bei Abholung stehen die Schilder in der Regel am selben Tag bereit. Beim Versand gilt die vereinbarte Lieferzeit. Versendete Kennzeichen sind <strong>nicht amtlich gestempelt</strong> – die Zulassungsplakette wird ausschließlich von der Zulassungsbehörde aufgebracht. Das Risiko des zufälligen Untergangs geht bei Verbrauchern erst mit Übergabe an Sie über.</p>
+
+  <h4>§ 6 Ihre Mitwirkung</h4>
+  <p>Für die Bearbeitung sind vollständige und richtige Angaben nötig, insbesondere Fahrzeug- und Halterdaten, Unterlagen und – bei der Online-Abmeldung – die Sicherheitscodes. Für Verzögerungen oder Mehrkosten, die auf unrichtigen oder unvollständigen Angaben beruhen, können wir nicht einstehen. Prägungen erfolgen auf Grundlage der von Ihnen übermittelten Kennzeichenkombination.</p>
+
+  <h4>§ 7 Besondere Bedingungen der Online-Abmeldung</h4>
+  <ul>
+    <li>Die Online-Außerbetriebsetzung setzt voraus, dass für Fahrzeug und Kennzeichen Sicherheitscodes vorhanden sind. Das ist in der Regel bei Erstzulassung ab dem 01.01.2015 der Fall.</li>
+    <li>Für die Zulassungsbezirke Gelsenkirchen, Herne und den Rheinisch-Bergischen Kreis (Bergisch Gladbach) ist das Verfahren derzeit nicht verfügbar.</li>
+    <li>Die Codes unter den Siegeln und auf der ZB1 sind einmalig verwendbar. Wurden sie bereits freigelegt und verbraucht, ist eine Online-Abmeldung nicht mehr möglich.</li>
+    <li>Wir schulden die sorgfältige Durchführung, nicht den Erfolg. Lässt sich die Abmeldung aus Gründen, die nicht wir zu vertreten haben, online nicht durchführen, entsteht kein Entgelt. Wir bieten Ihnen dann die Abwicklung vor Ort an.</li>
+  </ul>
+
+  <h4>§ 8 Widerrufsrecht</h4>
+  <p>Verbrauchern steht ein Widerrufsrecht nach Maßgabe der <a href="#widerruf">Widerrufsbelehrung</a> zu. Bitte beachten Sie die dort genannten Ausnahmen, insbesondere bei individuell geprägten Kennzeichen und bei vollständig erbrachten Dienstleistungen.</p>
+
+  <h4>§ 9 Mängelhaftung</h4>
+  <p>Es gilt das gesetzliche Mängelhaftungsrecht. Für gebrauchte Sachen beträgt die Verjährungsfrist ein Jahr ab Ablieferung, sofern es sich nicht um Schadensersatzansprüche handelt.</p>
+
+  <h4>§ 10 Haftung</h4>
+  <p>Wir haften unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie bei Verletzung von Leben, Körper oder Gesundheit. Bei einfacher Fahrlässigkeit haften wir nur für die Verletzung wesentlicher Vertragspflichten und der Höhe nach begrenzt auf den vertragstypischen, vorhersehbaren Schaden. Wesentliche Vertragspflichten sind solche, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung Sie regelmäßig vertrauen dürfen.</p>
+
+  <h4>§ 11 Streitbeilegung</h4>
+  <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG).</p>
+
+  <h4>§ 12 Schlussbestimmungen</h4>
+  <p>Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts. Zwingende Verbraucherschutzvorschriften des Staates Ihres gewöhnlichen Aufenthalts bleiben unberührt. Sollte eine Bestimmung unwirksam sein, bleibt die Wirksamkeit der übrigen unberührt.</p>
+  <p>Stand: Diese Fassung gilt ab dem Zeitpunkt ihrer Veröffentlichung auf dieser Website.</p>
+</details>
+
+<details class="legal" id="widerruf">
+  <summary>Widerrufsbelehrung und Muster-Widerrufsformular</summary>
+
+  <p>Die folgende Belehrung gilt für Verbraucher. Weil wir sowohl Waren liefern als auch Dienstleistungen erbringen, ist sie nach beidem getrennt.</p>
+
+  <h4>A. Widerrufsrecht bei Dienstleistungen (z. B. Online-Abmeldung, Zulassungsvorgänge)</h4>
+  <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.</p>
+  <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Mustafa Demiral, Zulassungsdienst &amp; Autoschilder Demiral, Bottroper Str. 104, 45356 Essen, Telefon +49 201 4746926, E-Mail mdemiral@aol.com) mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das unten stehende Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist. Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.</p>
+  <p><strong>Folgen des Widerrufs:</strong> Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten, unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet.</p>
+  <p>Haben Sie verlangt, dass die Dienstleistung während der Widerrufsfrist beginnen soll, so haben Sie uns einen angemessenen Betrag zu zahlen, der dem Anteil der bis zu dem Zeitpunkt, zu dem Sie uns von der Ausübung des Widerrufsrechts unterrichten, bereits erbrachten Dienstleistungen im Vergleich zum Gesamtumfang der im Vertrag vorgesehenen Dienstleistungen entspricht.</p>
+  <p><strong>Vorzeitiges Erlöschen:</strong> Das Widerrufsrecht erlischt bei einem Vertrag über die Erbringung von Dienstleistungen, wenn wir die Dienstleistung vollständig erbracht haben und mit der Ausführung erst begonnen haben, nachdem Sie dazu Ihre ausdrückliche Zustimmung gegeben und gleichzeitig Ihre Kenntnis davon bestätigt haben, dass Sie Ihr Widerrufsrecht bei vollständiger Vertragserfüllung durch uns verlieren (§ 356 Abs. 4 BGB). Diese Zustimmung holen wir im Abmeldeformular ausdrücklich ein. Da die Außerbetriebsetzung typischerweise sofort ausgeführt wird, erlischt Ihr Widerrufsrecht in diesem Fall unmittelbar mit der Durchführung.</p>
+
+  <h4>B. Widerrufsrecht bei Warenlieferungen (Kennzeichenschilder)</h4>
+  <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.</p>
+  <p>Für die Ausübung gelten die unter A. genannten Kontaktdaten und Formalien. Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene günstigste Standardlieferung gewählt haben) unverzüglich und spätestens binnen vierzehn Tagen zurückzuzahlen. Wir können die Rückzahlung verweigern, bis wir die Waren wieder zurückerhalten haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt ist. Sie tragen die unmittelbaren Kosten der Rücksendung der Waren. Sie müssen für einen etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen zurückzuführen ist.</p>
+
+  <h4>C. Ausschluss des Widerrufsrechts</h4>
+  <p>Das Widerrufsrecht besteht nicht bei Verträgen zur Lieferung von Waren, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch den Verbraucher maßgeblich ist oder die eindeutig auf die persönlichen Bedürfnisse des Verbrauchers zugeschnitten sind (§ 312g Abs. 2 Nr. 1 BGB). <strong>Kennzeichenschilder werden mit der von Ihnen gewählten Kombination geprägt und sind damit Sonderanfertigungen.</strong> Für sie besteht kein Widerrufsrecht.</p>
+
+  <h4>Muster-Widerrufsformular</h4>
+  <div class="box">
+    <p>(Wenn Sie den Vertrag widerrufen wollen, füllen Sie bitte dieses Formular aus und senden Sie es zurück.)</p>
+    <p>An: Mustafa Demiral, Zulassungsdienst &amp; Autoschilder Demiral, Bottroper Str. 104, 45356 Essen, E-Mail: mdemiral@aol.com</p>
+    <p>Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*) / die Erbringung der folgenden Dienstleistung (*)</p>
+    <p>_______________________________________________</p>
+    <p>Bestellt am (*) / erhalten am (*): _____________<br>
+    Name des/der Verbraucher(s): _____________<br>
+    Anschrift des/der Verbraucher(s): _____________<br>
+    Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier): _____________<br>
+    Datum: _____________</p>
+    <p>(*) Unzutreffendes streichen.</p>
+  </div>
+</details>
+
 <details class="legal" id="datenschutz">
-  <summary>Datenschutz</summary>
-  Diese Website verarbeitet personenbezogene Daten nur, soweit dies zur Bereitstellung der Seite und zur Bearbeitung Ihrer Anfragen erforderlich ist. Bei Kontaktaufnahme per Telefon, E-Mail oder WhatsApp gelten zusätzlich die Bestimmungen des jeweiligen Anbieters (WhatsApp Ireland Ltd.). Zur Darstellung binden wir Google Maps und Google Fonts ein; dabei kann Ihre IP-Adresse an Google übertragen werden. Eine darüber hinausgehende Weitergabe an Dritte erfolgt nicht, außer soweit gesetzlich vorgeschrieben. <em>Hinweis: Dieser Platzhaltertext ersetzt keine rechtssichere Datenschutzerklärung – bitte vor Veröffentlichung durch eine individuell geprüfte Fassung ersetzen.</em>
+  <summary>Datenschutzerklärung</summary>
+
+  <h4>1. Verantwortlicher</h4>
+  <p>Mustafa Demiral, Zulassungsdienst &amp; Autoschilder Demiral, Bottroper Str. 104, 45356 Essen, Telefon +49 201 4746926, E-Mail mdemiral@aol.com. Einen Datenschutzbeauftragten müssen wir nicht benennen.</p>
+
+  <h4>2. Grundsatz</h4>
+  <p>Wir verarbeiten personenbezogene Daten nur, soweit das für den Betrieb dieser Website und die Bearbeitung Ihrer Anfragen erforderlich ist. Diese Website setzt <strong>keine Cookies</strong> und verwendet weder Tracking noch Webanalyse. Es findet keine automatisierte Entscheidungsfindung statt.</p>
+
+  <h4>3. Hosting und Server-Logfiles</h4>
+  <p>Diese Website wird bei der Hostinger International Ltd. gehostet. Beim Aufruf werden automatisch Daten in Server-Logfiles gespeichert, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Übertragungsmenge, Meldung über den Abruf, Browsertyp und Betriebssystem sowie gegebenenfalls die zuvor besuchte Seite. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt im technisch fehlerfreien und sicheren Betrieb. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.</p>
+
+  <h4>4. Schriftarten von Google (Google Fonts)</h4>
+  <p>Zur einheitlichen Darstellung binden wir Schriftarten von Google ein. Beim Aufruf lädt Ihr Browser die Schriften von Servern der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Dabei wird Ihre IP-Adresse an Google übermittelt, eine Übertragung in die USA ist nicht ausgeschlossen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</p>
+
+  <h4>5. Skript-Bibliotheken über Cloudflare</h4>
+  <p>Für Animationen laden wir Programmbibliotheken über den Dienst cdnjs der Cloudflare, Inc. Auch dabei wird Ihre IP-Adresse an den Anbieter übermittelt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse liegt in einer zügigen und zuverlässigen Auslieferung der Website. Weitere Informationen: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>.</p>
+
+  <h4>6. Google Maps</h4>
+  <p>Auf der Kontaktseite binden wir eine Karte von Google Maps ein, damit Sie uns leichter finden. Anbieter ist die Google Ireland Limited. Beim Laden der Karte werden Ihre IP-Adresse und weitere Nutzungsdaten an Google übertragen, auch in die USA. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</p>
+
+  <h4>7. Kontaktaufnahme per Telefon, E-Mail und WhatsApp</h4>
+  <p>Wenn Sie uns anrufen, schreiben oder über WhatsApp kontaktieren, verarbeiten wir die dabei übermittelten Daten zur Bearbeitung Ihres Anliegens. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit es um die Anbahnung oder Durchführung eines Vertrags geht, sonst Art. 6 Abs. 1 lit. f DSGVO. WhatsApp wird von der WhatsApp Ireland Limited betrieben; die Kommunikation ist Ende-zu-Ende verschlüsselt, Verbindungs- und Nutzungsdaten fallen aber beim Anbieter an und können in Drittländer übertragen werden. Wenn Sie das vermeiden möchten, nutzen Sie bitte Telefon, E-Mail oder den Besuch bei uns.</p>
+
+  <h4>8. Bestell- und Abmeldeformular auf dieser Website</h4>
+  <p>Die Formulare für die Kennzeichenbestellung und die Online-Abmeldung übertragen Ihre Eingaben <strong>nicht an einen Server dieser Website</strong>. Ihre Angaben werden ausschließlich in Ihrem Browser zu einer Nachricht zusammengestellt. Erst wenn Sie auf „Per WhatsApp senden“ oder „Per E-Mail senden“ klicken, öffnet sich WhatsApp beziehungsweise Ihr E-Mail-Programm mit dem vorbereiteten Text – abgeschickt wird die Nachricht von Ihnen selbst. Bis dahin verlassen die Daten Ihr Gerät nicht.</p>
+  <p>Bei der Online-Abmeldung übermitteln Sie uns besonders sensible Angaben: die Fahrzeug-Identifizierungsnummer sowie die Sicherheitscodes von Fahrzeugschein und Kennzeichensiegeln. Wir verwenden diese Daten ausschließlich zur Durchführung der Außerbetriebsetzung im iKfz-Portal. Die Codes sind einmalig verwendbar und nach der Abmeldung wertlos.</p>
+
+  <h4>9. Speicherdauer</h4>
+  <p>Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist. Anfragen, die nicht zu einem Vertrag führen, löschen wir, sobald sie erledigt sind. Für Unterlagen, die handels- oder steuerrechtlichen Aufbewahrungspflichten unterliegen, gelten die gesetzlichen Fristen von sechs beziehungsweise zehn Jahren.</p>
+
+  <h4>10. Empfänger Ihrer Daten</h4>
+  <p>Im Rahmen der beauftragten Leistung geben wir Daten an die zuständige Zulassungsbehörde, gegebenenfalls an das Hauptzollamt, an Versicherer bei Kurzzeit- und Ausfuhrkennzeichen sowie an Versanddienstleister weiter, soweit das zur Vertragserfüllung nötig ist. Eine darüber hinausgehende Weitergabe erfolgt nicht.</p>
+
+  <h4>11. Ihre Rechte</h4>
+  <p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen Verarbeitungen, die auf Art. 6 Abs. 1 lit. f DSGVO beruhen (Art. 21). Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Wenden Sie sich dafür an die oben genannten Kontaktdaten.</p>
+  <p>Unabhängig davon steht Ihnen ein Beschwerderecht bei einer Aufsichtsbehörde zu. Für uns zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Postfach 20 04 44, 40102 Düsseldorf.</p>
+
+  <h4>12. Sicherheit</h4>
+  <p>Diese Website wird über eine verschlüsselte Verbindung (SSL/TLS) ausgeliefert, erkennbar am Schlosssymbol in der Adresszeile Ihres Browsers.</p>
 </details>
 
 <a class="wa-fab" href="https://wa.me/491637953047?text=Hallo!%20Ich%20habe%20eine%20Frage%20zu%20Zulassung%20bzw.%20Kennzeichen." target="_blank" rel="noopener" aria-label="WhatsApp-Chat mit Demiral öffnen">
@@ -1624,12 +1772,21 @@
     return 'mailto:' + MAIL + '?subject=' + encodeURIComponent(betreff) + '&body=' + encodeURIComponent(text);
   }
 
-  /* Prueft Pflichtfelder, markiert Leeres rot und meldet die fehlenden Namen */
+  /* Ein Kaestchen ist "leer", wenn es nicht angehakt ist */
+  function istLeer(el) {
+    return el.type === 'checkbox' ? !el.checked : !el.value.trim();
+  }
+
+  /* Prueft Pflichtfelder, markiert Fehlendes rot und nennt die Namen */
   function pruefe(felder, errBox) {
     var fehlt = [];
     felder.forEach(function (f) {
-      var leer = !f.el.value.trim();
-      f.el.classList.toggle('err', leer);
+      var leer = istLeer(f.el);
+      if (f.el.type === 'checkbox') {
+        f.el.closest('.check').classList.toggle('err', leer);
+      } else {
+        f.el.classList.toggle('err', leer);
+      }
       if (leer) fehlt.push(f.name);
     });
     if (fehlt.length) {
@@ -1650,7 +1807,7 @@
       ev.preventDefault();
       var felder = typeof felderFn === 'function' ? felderFn() : felderFn;
       if (!pruefe(felder, errBox)) {
-        felder.filter(function (f) { return !f.el.value.trim(); })[0].el.focus();
+        felder.filter(function (f) { return istLeer(f.el); })[0].el.focus();
         return;
       }
       var d = bauen();
@@ -1680,6 +1837,7 @@
     function obFelder() {
       var f = [{ el: obName, name: 'Name' }, { el: obTel, name: 'Telefon' }, { el: obMail, name: 'E-Mail' }];
       if (!obAddrWrap.hidden) f.push({ el: obAddr, name: 'Lieferadresse' });
+      f.push({ el: $('obAgb'), name: 'Bestätigung der AGB und Widerrufsbelehrung' });
       return f;
     }
     function obBauen() {
@@ -1696,6 +1854,7 @@
             + 'E-Mail: ' + obMail.value.trim();
       if (!obAddrWrap.hidden) t += '\nLieferadresse: ' + obAddr.value.trim();
       if (obNote.value.trim()) t += '\nAnmerkung: ' + obNote.value.trim();
+      t += '\nAGB und Widerrufsbelehrung bestätigt: ja';
       return { betreff: 'Bestellung Kennzeichen ' + k.kennzeichen, text: t };
     }
     absenden($('obWa'),      obFelder, obErr, obBauen, false);
@@ -1745,7 +1904,9 @@
       { el: abKz, name: 'Kennzeichen' }, { el: abFin, name: 'Fahrgestellnummer' },
       { el: abZb1, name: 'Sicherheitscode ZB1' }, { el: abVorn, name: 'Code Siegel vorn' },
       { el: abHinten, name: 'Code Siegel hinten' }, { el: abName, name: 'Name' },
-      { el: abTel, name: 'Telefon' }, { el: abMail, name: 'E-Mail' }
+      { el: abTel, name: 'Telefon' }, { el: abMail, name: 'E-Mail' },
+      { el: $('abAgb'), name: 'Bestätigung der AGB und Widerrufsbelehrung' },
+      { el: $('abSofort'), name: 'Zustimmung zum sofortigen Beginn' }
     ];
     function abBauen() {
       var t = 'Kennzeichen: ' + abKz.value.trim() + '\n'
@@ -1757,7 +1918,9 @@
             + 'Preis laut Website: 20,- € inkl. Gebühren der Zulassungsstelle und MwSt.\n\n'
             + 'Name: ' + abName.value.trim() + '\n'
             + 'Telefon: ' + abTel.value.trim() + '\n'
-            + 'E-Mail: ' + abMail.value.trim();
+            + 'E-Mail: ' + abMail.value.trim()
+            + '\n\nAGB und Widerrufsbelehrung bestätigt: ja'
+            + '\nAusdrückliche Zustimmung zum sofortigen Beginn (§ 356 Abs. 4 BGB): ja';
       return { betreff: 'Online-Abmeldung ' + abKz.value.trim(), text: t };
     }
     absenden($('abWa'),      abFelder, abErr, abBauen, false);
