@@ -168,6 +168,10 @@
   .navlinks a{text-decoration:none;position:relative;padding:5px 0;white-space:nowrap;}
   .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--siegel);transition:width .22s ease;}
   .navlinks a:hover::after{width:100%;}
+  /* neuer Online-Dienst: kleiner Punkt als Hinweis, Text bleibt schlicht */
+  .navlinks a.nav-neu{color:var(--siegel);font-weight:600;}
+  .navlinks a.nav-neu::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--siegel);margin-right:7px;vertical-align:middle;}
   .navcta{display:flex;gap:10px;align-items:center;}
   .btn{font-family:var(--font-body);font-weight:600;font-size:.9rem;padding:12px 20px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1.6px solid transparent;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;}
   .btn:hover{transform:translateY(-2px);}
@@ -537,6 +541,7 @@
     <ul class="navlinks" id="navlinks">
       <li><a href="#leistungen">Leistungen</a></li>
       <li><a href="#konfigurator">Kennzeichen</a></li>
+      <li><a href="#online-abmeldung" class="nav-neu">Online abmelden</a></li>
       <li><a href="#formulare">Formulare</a></li>
       <li><a href="#galerie">Bei uns</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
