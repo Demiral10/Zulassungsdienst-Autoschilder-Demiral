@@ -1377,29 +1377,24 @@
 
   /* ---------- price ---------- */
   var CARBON_EXTRA = 10;
-  var MOTORRAD_STUECK = 20;
-  /* Motorradgroessen haben einen eigenen Stueckpreis */
-  var MOTORRAD_GROESSEN = ['220 × 200 mm', '180 × 200 mm'];
-  function isMotorrad(){ return MOTORRAD_GROESSEN.indexOf(cfg.size) !== -1; }
+  /* Alle zweizeiligen Schilder - Motorrad, LKW, Quad - kosten pro Stueck gleich viel */
+  var ZWEIZEILIG_STUECK = 20;
   function euro(n){ return n.toFixed(2).replace('.', ',') + ' €'; }
   function priceText(){
     if (cfg.art === '3d') return null;
     var extra = (cfg.art === 'carbon') ? CARBON_EXTRA : 0;
-    if (isMotorrad()) return euro(MOTORRAD_STUECK * cfg.qty + extra);
+    if (isTwoRow()) return euro(ZWEIZEILIG_STUECK * cfg.qty + extra);
     if (cfg.qty === 1) return euro(15 + extra);
-    if (!isTwoRow()) return euro(30 + extra);
-    return null;
+    return euro(30 + extra);
   }
   function updatePrice(){
     var p = priceText();
     priceOut.textContent = p || 'auf Anfrage';
     if (cfg.art === '3d'){
       priceNote.textContent = '3D-Kennzeichen: Preis nennen wir Ihnen direkt per WhatsApp oder Telefon.';
-    } else if (isMotorrad()){
-      priceNote.textContent = 'Motorradschilder 20,- € pro Stück.'
+    } else if (isTwoRow()){
+      priceNote.textContent = 'Zweizeilige Schilder für Motorrad, LKW und Quad: 20,- € pro Stück.'
         + (cfg.art === 'carbon' ? ' Zuzüglich 10,- € für die Carbon-Optik (einmalig pro Bestellung).' : '');
-    } else if (cfg.qty === 2 && isTwoRow()){
-      priceNote.textContent = 'Zweizeilige Schilder: Preis auf Anfrage. Einzeln 15,- € inkl. MwSt. pro Stück.';
     } else if (cfg.art === 'carbon'){
       priceNote.textContent = 'Inklusive 10,- € Aufpreis für die Carbon-Optik (einmalig pro Bestellung).';
     } else {
